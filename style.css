@@ -1,0 +1,827 @@
+/* ==========================================================================
+   1. CSS VARIABLES & RESETS
+   ========================================================================== */
+:root {
+  --primary-red: #E50914;
+  --primary-red-hover: #F40612;
+  --bg-dark: #000000;
+  --card-bg-dark: #161616;
+  --card-glass-bg: rgba(22, 22, 22, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --text-white: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --input-bg: rgba(22, 22, 22, 0.8);
+  --input-border: rgba(255, 255, 255, 0.4);
+  
+  --font-main: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --max-width: 1200px;
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Base Container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ==========================================================================
+   2. REUSABLE COMPONENTS & BUTTONS
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-primary {
+  background-color: var(--primary-red);
+  color: var(--text-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-red-hover);
+}
+
+.btn-sm {
+  padding: 0.35rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.2;
+}
+
+.btn-lg {
+  padding: 0.85rem 1.75rem;
+  font-size: 1.25rem;
+  gap: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+/* Shared Section Heading */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--text-white);
+}
+
+/* Language Selector Widget */
+.language-select-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.language-select-wrapper .globe-icon {
+  position: absolute;
+  left: 0.75rem;
+  pointer-events: none;
+  fill: var(--text-white);
+}
+
+.language-select-wrapper select {
+  appearance: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: var(--text-white);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.25rem;
+  padding: 0.35rem 1.75rem 0.35rem 2.25rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.language-select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 0.75rem;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--text-white);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   3. NAVIGATION BAR
+   ========================================================================== */
+.navbar-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem;
+}
+
+.netflix-logo {
+  height: 2rem;
+  width: auto;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   4. HERO SECTION
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 7.5rem 1.5rem 4rem;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%),
+              linear-gradient(to top, var(--bg-dark) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: -1;
+}
+
+.hero-content {
+  max-width: 60rem;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.hero-description {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  color: var(--text-white);
+}
+
+/* Floating Label Email Form */
+.email-signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-wrapper input {
+  width: 100%;
+  height: 3.5rem;
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 0.25rem;
+  padding: 1.25rem 1rem 0.35rem;
+  color: var(--text-white);
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  backdrop-filter: blur(4px);
+  transition: border-color var(--transition-fast);
+}
+
+.input-wrapper input:focus {
+  border-color: var(--text-white);
+  border-width: 2px;
+}
+
+.input-wrapper label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: transform var(--transition-fast), font-size var(--transition-fast), top var(--transition-fast);
+}
+
+/* Floating effect when input is focused or non-empty */
+.input-wrapper input:focus ~ label,
+.input-wrapper input:not(:placeholder-shown) ~ label {
+  top: 0.65rem;
+  transform: translateY(0);
+  font-size: 0.75rem;
+}
+
+/* Bottom Curve Line Divider */
+.hero-curve-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2rem;
+  border-top: 4px solid #232323;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background-color: var(--bg-dark);
+}
+
+/* ==========================================================================
+   5. TRENDING NOW (CAROUSEL)
+   ========================================================================== */
+.trending-section {
+  padding: 3rem 1.5rem;
+}
+
+.trending-carousel-wrapper {
+  position: relative;
+  margin: 0 -1.5rem;
+  padding: 0 1.5rem;
+}
+
+.trending-carousel {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1rem 0 2rem;
+  /* Custom thin scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-red) transparent;
+}
+
+.trending-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+.trending-carousel::-webkit-scrollbar-thumb {
+  background: var(--primary-red);
+  border-radius: 3px;
+}
+
+.movie-card {
+  flex: 0 0 calc(50% - 0.75rem);
+  position: relative;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.poster-wrapper {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.poster-wrapper img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.rank-badge {
+  position: absolute;
+  bottom: -0.5rem;
+  left: -0.5rem;
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--bg-dark);
+  -webkit-text-stroke: 2px #595959;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  user-select: none;
+}
+
+.movie-card:hover .poster-wrapper {
+  transform: scale(1.06) translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8), 0 0 12px rgba(229, 9, 20, 0.3);
+}
+
+/* ==========================================================================
+   6. REASONS TO JOIN (GLASSMORPHISM CARDS)
+   ========================================================================== */
+.reasons-section {
+  padding: 3rem 1.5rem;
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.reason-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(30, 30, 40, 0.6) 0%, rgba(15, 15, 20, 0.8) 100%);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 14rem;
+  overflow: hidden;
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.reason-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.reason-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-white);
+}
+
+.reason-content p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.reason-icon {
+  align-self: flex-end;
+  margin-top: 1rem;
+  color: var(--primary-red);
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   7. FAQ SECTION (PURE CSS ACCORDION)
+   ========================================================================== */
+.faq-section {
+  padding: 3rem 1.5rem;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+.accordion-toggle {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2d2d2d;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--transition-fast);
+}
+
+.accordion-header:hover {
+  background-color: #414141;
+}
+
+.accordion-header .icon {
+  font-size: 1.75rem;
+  font-weight: 300;
+  line-height: 1;
+  transition: transform var(--transition-fast);
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #2d2d2d;
+  border-top: 1px solid var(--bg-dark);
+  transition: max-height 0.35s ease-out, padding 0.35s ease-out;
+  padding: 0 1.5rem;
+}
+
+.accordion-body p {
+  font-size: 1rem;
+  color: var(--text-white);
+  line-height: 1.6;
+}
+
+.accordion-body p + p {
+  margin-top: 1rem;
+}
+
+/* CSS-Only Radio Input Toggle Behavior */
+.accordion-toggle:checked + .accordion-header {
+  background-color: #383838;
+}
+
+.accordion-toggle:checked + .accordion-header .icon {
+  transform: rotate(45deg);
+}
+
+.accordion-toggle:checked ~ .accordion-body {
+  max-height: 30rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.faq-signup {
+  text-align: center;
+}
+
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+.site-footer {
+  padding: 4rem 1.5rem 2rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  border-top: 4px solid #232323;
+}
+
+.footer-top {
+  margin-bottom: 2rem;
+}
+
+.footer-top a {
+  text-decoration: underline;
+}
+
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-column {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-column a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+.footer-column a:hover {
+  color: var(--text-white);
+}
+
+.footer-lang {
+  margin-bottom: 1.5rem;
+}
+
+.footer-country {
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   9. RESPONSIVE BREAKPOINTS (MEDIA QUERIES)
+   ========================================================================== */
+
+/* Mobile / Tablet Small (>576px) */
+@media (min-width: 576px) {
+  .email-signup-form {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  
+  .email-signup-form .input-wrapper {
+    flex: 1;
+  }
+
+  .trending-carousel .movie-card {
+    flex: 0 0 calc(33.333% - 0.85rem);
+  }
+
+  .reasons-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet (>768px) */
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-title {
+    font-size: 3.25rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .trending-carousel .movie-card {
+    flex: 0 0 calc(25% - 0.95rem);
+  }
+
+  .rank-badge {
+    font-size: 5.5rem;
+    bottom: -0.75rem;
+    left: -0.75rem;
+  }
+
+  .accordion-header {
+    font-size: 1.35rem;
+  }
+
+  .footer-links-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Laptop (>992px) */
+@media (min-width: 992px) {
+  .hero-title {
+    font-size: 3.75rem;
+  }
+
+  .trending-carousel .movie-card {
+    flex: 0 0 calc(20% - 1rem);
+  }
+
+  .reasons-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer-links-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktop (>1200px) */
+@media (min-width: 1200px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+}
+/* ==========================================================================
+   10. MOVIE MODAL (PURE CSS TOGGLE)
+   ========================================================================== */
+.modal-toggle-input {
+  display: none;
+}
+
+/* Modal Hidden by Default */
+.movie-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.movie-modal {
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  background-color: #181818;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  z-index: 1001;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: #181818;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.modal-hero {
+  position: relative;
+  height: 350px;
+}
+
+.modal-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #181818 0%, transparent 60%);
+}
+
+.modal-hero-controls {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 2rem;
+  right: 2rem;
+}
+
+.modal-movie-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.modal-icon-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(42, 42, 42, 0.6);
+  color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+}
+
+.modal-icon-btn:hover {
+  border-color: #fff;
+}
+
+.modal-body {
+  padding: 1.5rem 2rem 2.5rem;
+}
+
+.modal-details-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.modal-metadata {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.match-score {
+  color: #46d369;
+  font-weight: 700;
+}
+
+.meta-badge, .meta-hd {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 0.1rem 0.4rem;
+  font-size: 0.75rem;
+  border-radius: 2px;
+}
+
+.modal-synopsis {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #d2d2d2;
+}
+
+.modal-side-info {
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.modal-side-info .label {
+  color: #777;
+}
+
+/* Activate Modal via Pure CSS Checkbox Trigger */
+#modal-movie-1:checked ~ .movie-modal-overlay,
+#modal-movie-2:checked ~ .movie-modal-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#modal-movie-1:checked ~ .movie-modal-overlay .movie-modal,
+#modal-movie-2:checked ~ .movie-modal-overlay .movie-modal {
+  transform: scale(1);
+}
+
+/* Responsive modal layout for mobile */
+@media (max-width: 768px) {
+  .modal-details-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .modal-hero {
+    height: 250px;
+  }
+  .modal-movie-title {
+    font-size: 1.5rem;
+  }
+}
